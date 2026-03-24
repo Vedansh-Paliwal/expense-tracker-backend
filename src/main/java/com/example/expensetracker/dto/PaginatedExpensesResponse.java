@@ -36,4 +36,7 @@ public class PaginatedExpensesResponse {
     public long getTotalElements() {
         return totalElements;
     }
+    public int getTotalPages() {
+        return totalPages;
+    }
 }
