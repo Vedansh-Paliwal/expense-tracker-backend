@@ -20,7 +20,7 @@ public class MongoConfig {
     public PlatformTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
         return new MongoTransactionManager(dbFactory);
     }
-    @WritingConverter
+    @WritingConverter // “When saving to Mongo, use this converter”
     public static class LocalDateToStringConverter implements Converter<LocalDate, String> {
         @Override
         public String convert(LocalDate source) {
@@ -28,7 +28,7 @@ public class MongoConfig {
         }
     }
 
-    @ReadingConverter
+    @ReadingConverter // “When reading from Mongo, use this converter”
     public static class StringToLocalDateConverter implements Converter<String, LocalDate> {
         @Override
         public LocalDate convert(String source) {

@@ -7,6 +7,7 @@ import com.example.expensetracker.exception.AccessDeniedException;
 import com.example.expensetracker.exception.ResourceNotFoundException;
 import com.example.expensetracker.repository.ExpenseRepository;
 import org.bson.Document;
+import org.bson.types.Decimal128;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -69,13 +70,15 @@ public class ExpenseService {
             if(min.compareTo(max) > 0){
                 throw new IllegalArgumentException("Min amount cannot exceed Max amount");
             }
-            query.addCriteria(Criteria.where("amount").gte(min.doubleValue()).lte(max.doubleValue()));
+            query.addCriteria(Criteria.where("amount")
+                    .gte(new Decimal128(min))
+                    .lte(new Decimal128(max)));
         }
         else if(min != null) {
-            query.addCriteria(Criteria.where("amount").gte(min.doubleValue()));
+            query.addCriteria(Criteria.where("amount").gte(new Decimal128(min)));
         }
         else if(max != null) {
-            query.addCriteria(Criteria.where("amount").lte(max.doubleValue()));
+            query.addCriteria(Criteria.where("amount").lte(new Decimal128(max)));
         }
 
         LocalDate start = filter.getStartDate();
@@ -85,13 +88,13 @@ public class ExpenseService {
             if (start.isAfter(end)) {
                 throw new IllegalArgumentException("Start date must be before end date");
             }
-            query.addCriteria(Criteria.where("date").gte(start).lte(end));
+            query.addCriteria(Criteria.where("date").gte(start.toString()).lte(end.toString()));
         }
         else if (start != null) {
-            query.addCriteria(Criteria.where("date").gte(start));
+            query.addCriteria(Criteria.where("date").gte(start.toString()));
         }
         else if (end != null) {
-            query.addCriteria(Criteria.where("date").lte(end));
+            query.addCriteria(Criteria.where("date").lte(end.toString()));
         }
 
         return query;

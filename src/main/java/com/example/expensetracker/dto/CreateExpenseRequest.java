@@ -1,9 +1,6 @@
 package com.example.expensetracker.dto;
 
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,6 +21,7 @@ public class CreateExpenseRequest {
     private String description;
 
     @NotNull
+    @PastOrPresent
     private LocalDate date;
 
     @NotBlank
