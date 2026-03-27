@@ -146,16 +146,14 @@ spring.profiles.active=local
 mvn spring-boot:run
 ```
 
-API will be available at `http://localhost:8080`
-
 ---
 
 ## 🌍 Deployment
 
 | Part | Platform | Status |
 |------|----------|--------|
-| Backend | Render (Docker) | *(add URL after deployment)* |
-| Frontend | *(in development)* | — |
+| Backend | Render (Docker) | https://expense-tracker-backend-kobn.onrender.com/ |
+| Frontend | Netlify | https://expense-tracker-app-vp.netlify.app/ |
 
 Render deployment uses the included `Dockerfile` (multi-stage Maven build). Set `JWT_SECRET`, `MONGODB_URI`, and `GEMINI_API_KEY` as environment variables in Render's dashboard.
 
