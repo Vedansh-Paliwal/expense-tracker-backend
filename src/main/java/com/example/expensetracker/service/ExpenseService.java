@@ -444,7 +444,7 @@ public class ExpenseService {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(
                         Criteria.where("userId").is(userId)
-                                .and("date").gte(startDate).lt(nextStart)
+                                .and("date").gte(startDate.toString()).lt(nextStart.toString())
                 ),
                 Aggregation.group("category")
                         .sum("amount").as("totalAmount"),
