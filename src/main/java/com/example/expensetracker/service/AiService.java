@@ -109,7 +109,7 @@ public class AiService {
         String snapshotJson = objectMapper.writeValueAsString(snapshot);
         return """
             You are a financial advisor AI.
-            
+            Use Indian Rupees (₹) for all amounts.
             Analyze the following structured financial data:
             
             %s
